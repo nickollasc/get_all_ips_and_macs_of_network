@@ -23,5 +23,5 @@ awk '$3=="40:CD:7A:25:3D:71"?$0=$0" TV":$0'				| # TV
 awk '$3=="DC:A6:32:3C:4C:C0"?$0=$0" Raspberry":$0'			| # Raspberry
 awk '$3=="_"?$0=$0" Laptop":$0'						| # Laptop
 awk '$3=="D0:33:11:35:B7:29"?$0=$0" \033[33;1mGuest-Out\033[m":$0'	| # Guest Out 
-cat <( echo Id IP Mac DeviceAlias ) -					| # append header to stdout
+cat <( echo -e "\e[32;1mId IP Mac DeviceAlias\e[m" ) -			| # append header to stdout
 column -t								  # format stdout
