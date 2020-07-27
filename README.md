@@ -1,3 +1,1 @@
 # get_all_ips_and_macs_of_network
-# get_all_ips_and_macs_of_network
-# get_all_ips_and_macs_of_network
