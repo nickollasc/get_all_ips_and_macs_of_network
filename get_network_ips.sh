@@ -15,6 +15,7 @@ function get_ips_and_macs {
 
 get_ips_and_macs							|
 sort -k2n								| # numeric sort by column 2 IPs
+# creates a new column with the name of device based in your MAC
 awk '$3!=""?$3:$3="_"'							| # fill IPs without MAC with _ 
 awk '$3=="68:FF:7B:6B:5C:D5"?$0=$0" Router":$0'				| # Router
 awk '$3=="DC:90:88:2E:8C:12"?$0=$0" Mobile":$0'				| # Mobile
