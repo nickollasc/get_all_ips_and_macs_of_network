@@ -15,7 +15,7 @@ function get_ips_and_macs {
 
 get_ips_and_macs							|
 sort -k2n								| # numeric sort by column 2 IPs
-# creates a new column with the name of device based in your MAC
+# creates a new column - device alias based in your MAC
 awk '$3!=""?$3:$3="_"'							| # fill IPs without MAC with _ 
 awk '$3=="68:FF:7B:6B:5C:D5"?$0=$0" Router":$0'				| # Router
 awk '$3=="DC:90:88:2E:8C:12"?$0=$0" Mobile":$0'				| # Mobile
@@ -23,4 +23,5 @@ awk '$3=="40:CD:7A:25:3D:71"?$0=$0" TV":$0'				| # TV
 awk '$3=="DC:A6:32:3C:4C:C0"?$0=$0" Raspberry":$0'			| # Raspberry
 awk '$3=="_"?$0=$0" Laptop":$0'						| # Laptop
 awk '$3=="D0:33:11:35:B7:29"?$0=$0" \033[33;1mGuest-Out\033[m":$0'	| # Guest Out 
+cat <( echo Id IP Mac DeviceAlias ) -					| # append header to stdout
 column -t								  # format stdout
