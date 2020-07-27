@@ -1,1 +1,1 @@
-# get_all_ips_and_macs_of_network
+get all IPs and MACs of the entire network

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ! type nmap &> /dev/null; then
-  test -e /etc/debian_version && sudo apt install -y nmap || yum install -y nmap
+  test -e /etc/debian_version && sudo apt install -y nmap || sudo yum install -y nmap
 fi
 
 function get_ips {
