@@ -1,5 +1,7 @@
 #!/bin/bash
 
+test $( whoami ) != "root" && echo erro: only root can execute this script && exit
+
 if ! type nmap &> /dev/null; then
   test -e /etc/debian_version && sudo apt install -y nmap || sudo yum install -y nmap
 fi
@@ -7,7 +9,7 @@ fi
 function get_ips_and_macs {
   lan_ip=$( ip route | awk '/default/ { split( $3, a, "." ); print a[1]"."a[2]"."a[3] }' )	  # get lan ip like 192.168.0
 
-  sudo nmap -sn -PO ${lan_ip}.1-255								| # ping scan for a ip range 
+  nmap -sn -PO ${lan_ip}.1-255									| # ping scan for a ip range 
   grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}|[[:xdigit:]:]{6,}' 					| # filter only IP and MAC address
   awk 'BEGIN{ m=0 } { if ( $1 ~ /^[[:digit:].]{3,}/ ) m++; print m, $0 }'			| # create a relationship between IP and MAC 
   awk '{ a[$1] = a[$1] FS substr( $0, index( $0,$2 ) ) } END{ for( i in a ) print i a[i] }'	| # put ID, IP and MAC on same line
